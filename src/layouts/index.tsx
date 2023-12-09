@@ -1,7 +1,6 @@
-import { Link, Outlet } from "umi";
 import { ConfigProvider, Button } from "antd";
-import styles from "./index.less";
 import { css } from "@emotion/css";
+import { Link, Outlet } from "umi";
 
 export default function Layout() {
   return (
@@ -19,6 +18,9 @@ export default function Layout() {
       </Button>
       <Button type="link">
         <Link to="/list">列表滚动例子</Link>
+      </Button>
+      <Button type="link">
+        <Link to="/gridDragDrop">网格拖拽例子</Link>
       </Button>
       <div
         className={css`
