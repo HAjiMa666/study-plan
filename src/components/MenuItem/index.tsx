@@ -1,3 +1,4 @@
+import { CssBaseline } from "@mui/material";
 import Link from "next/link";
 import React, { FC, memo } from "react";
 

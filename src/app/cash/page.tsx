@@ -1,9 +1,15 @@
 import React, { memo } from "react";
+import { Table, Button } from "@mui/material";
 
-import { Table } from "@/components";
+import DataOverview from "./components/dataOverview";
 
 const Components = memo(() => {
-  return <div></div>;
+  return (
+    <div>
+      <DataOverview />
+      <Button variant="contained">Contained</Button>
+    </div>
+  );
 });
 
 export default Components;
