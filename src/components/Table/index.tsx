@@ -1,80 +1,71 @@
 import React, { FC, memo } from "react";
-import Image from "next/image";
+import {
+  Paper,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+} from "@mui/material";
 
 type TableProps = {
-  columns: any;
-  dataSource: any;
+  columns?: any;
+  dataSource?: any;
 };
 
-const Table: FC<TableProps> = memo(() => {
+const TableCpn: FC<TableProps> = memo((props) => {
+  const { columns, dataSource } = props;
   return (
-    <div className="overflow-x-auto">
-      <table className="table">
-        {/* head */}
-        <thead>
-          <tr>
-            <th>
-              <label>
-                <input type="checkbox" className="checkbox" />
-              </label>
-            </th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>
-              <label>
-                <input type="checkbox" className="checkbox" />
-              </label>
-            </th>
-            <td>
-              <div className="flex items-center gap-3">
-                <div className="avatar">
-                  <div className="mask mask-squircle w-12 h-12">
-                    <Image
-                      src="https://avatars.githubusercontent.com/u/70849018?v=4"
-                      alt="用户头像"
-                      layout="fill"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="font-bold">Hart Hagerty</div>
-                  <div className="text-sm opacity-50">United States</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              Zemlak, Daniel and Leannon
-              <br />
-              <span className="badge badge-ghost badge-sm">
-                Desktop Support Technician
-              </span>
-            </td>
-            <td>Purple</td>
-            <th>
-              <button className="btn btn-ghost btn-xs">details</button>
-            </th>
-          </tr>
-        </tbody>
-        {/* foot */}
-        <tfoot>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
-            <th></th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+    <TableContainer component={Paper} elevation={4} title="记账">
+      <Table sx={{ minWidth: 650 }}>
+        <TableHead>
+          <TableRow>
+            {columns?.map((item) => {
+              return (
+                <TableCell key={item.id} align={item.align ?? "center"}>
+                  {item?.title}
+                </TableCell>
+              );
+            })}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {dataSource.map((row) => {
+            const keys = Object.keys(row)?.filter((item) => item !== "id");
+            return (
+              <TableRow
+                key={row.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                {keys.map((item, index) => {
+                  return (
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      key={item}
+                      align={
+                        columns.find((column) => column.id === item)?.align ??
+                        "center"
+                      }>
+                      {row[item]}
+                    </TableCell>
+                  );
+                })}
+                <TableCell>
+                  {
+                    <>
+                      <Button variant="text">编辑</Button>
+                    </>
+                  }
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 });
 
-export default Table;
+export default TableCpn;
