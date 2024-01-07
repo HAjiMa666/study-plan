@@ -1,0 +1,7 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    // 禁用显示名字
+    "react/display-name": 0
+  }
+}
